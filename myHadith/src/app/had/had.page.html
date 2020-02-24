@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Accueil</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <ion-refresher slot="fixed" (ionRefresh)="loadAllHads($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Tirer vers le bas pour rafraichir"
+                refreshingSpinner="circles"
+                refreshingText="Rafraîchissement...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div>
+        <ion-list>
+            <ion-item *ngFor="let had of allHad"  [routerLink]="'/had/'+[had._id]">
+                <ion-label>
+                    <h2>{{had.title}}</h2>
+                    <h3><span *ngFor="let cat of had.category">{{cat.name}}</span></h3>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,26 @@
+.title-lang {
+  color: var(--ion-color-primary);
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+ion-card-content {
+  font-size: 20px;
+  white-space: pre-wrap;
+}
+ion-card-content p {
+  font-size: 18px;
+  white-space: pre-wrap;
+}
+
+ion-label {
+  color: var(--ion-color-primary);
+}
+
+ion-chip {
+  border:1px solid var(--ion-color-primary);
+}
+
+ion-card {
+  margin-bottom: 6em;
+}

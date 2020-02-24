@@ -1,0 +1,42 @@
+ion-menu-button {
+  color: var(--ion-color-primary);
+}
+
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-content ion-toolbar {
+  --background: transparent;
+}
+
+ion-refresher-content {
+  color: #5da316 !important;
+}
+
+.refresher-ios .refresher-pulling-text {
+  color: #5da316 !important;
+}
+
+.refresher-refreshing-icon {
+  color: #5da316 !important;
+}
+
+
+.refresher-refreshing-icon ion-spinner {
+  color: #5da316 !important;
+}
+

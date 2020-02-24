@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Retour"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!load">{{had?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{had?.title}}</ion-card-title>
+
+      <ion-card-subtitle>
+        <ion-chip>
+          <ion-label *ngFor="let cat of had?.category" [routerLink]="'/categories/'+[cat.name]" outline>{{cat.name}}</ion-label>
+        </ion-chip>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content *ngFor="let trans of had?.translate">
+
+      <h3 class="title-lang">{{trans.lang}}</h3>
+      <p *ngIf="trans.flag != 'ar'" > {{trans.text}} </p>
+      <p *ngIf="trans.flag == 'ar'" style="direction:rtl;"> {{trans.text}} </p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="arrow-forward-circle"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="end">
+    <ion-fab-button (click)="share(had)"><ion-icon name="share"></ion-icon></ion-fab-button>
+    <ion-fab-button (click)="save(had)"><ion-icon name="save"></ion-icon></ion-fab-button>
+    <ion-fab-button (click)="copy(had)"><ion-icon name="copy"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

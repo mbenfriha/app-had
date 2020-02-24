@@ -1,0 +1,8 @@
+{
+  "name": "myHadith",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
