@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
+        IonicStorageModule.forRoot()
     ],
     providers: [
         StatusBar,

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Storage} from '@ionic/storage';
+import {Hadith} from '../../_models/hadith';
 
 @Component({
   selector: 'app-save',
@@ -6,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./save.component.scss'],
 })
 export class SaveComponent implements OnInit {
+    allHads: Hadith[] = [];
 
-  constructor() { }
+    constructor(
+      private storage: Storage) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storage.get('save').then(hads => {
+      this.allHads = hads;
+    });
+  }
 
 }

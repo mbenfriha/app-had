@@ -3,12 +3,39 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>had</ion-title>
+    <ion-title>Hasard</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content [fullscreen]="true">
-  <div>
-  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Tirer vers le bas pour rafraichir"
+            refreshingSpinner="circles"
+            refreshingText="Rafraîchissement...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{had?.title}}</ion-card-title>
+
+      <ion-card-subtitle>
+        <ion-chip>
+          <ion-label *ngFor="let cat of had?.category" [routerLink]="'/categories/'+[cat.name]" outline>{{cat.name}}</ion-label>
+        </ion-chip>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content *ngFor="let trans of had?.translate">
+
+      <h3 class="title-lang">{{trans.lang}}</h3>
+      <p *ngIf="trans.flag != 'ar'" > {{trans.text}} </p>
+      <p *ngIf="trans.flag == 'ar'" style="direction:rtl;"> {{trans.text}} </p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

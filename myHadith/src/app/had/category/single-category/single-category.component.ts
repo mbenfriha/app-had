@@ -20,7 +20,7 @@ export class SingleCategoryComponent implements OnInit {
 
     ngOnInit() {}
 
-    private loadAllHad(event = null) {
+     loadAllHad(event = null) {
         this.categoryService.getAllByCategory(this.name).pipe(first()).subscribe(hadiths => {
             this.allHad = hadiths;
             if (event) {

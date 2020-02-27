@@ -10,10 +10,15 @@ export class HadService {
     url = environment.API_URL;
     constructor(private http: HttpClient) { }
     getAll(options) {
-        console.log(options);
         return this.http.post<Hadith[]>(this.url + `had`, options);
+    }
+    searchHad(search) {
+        return this.http.post<Hadith[]>(this.url + `had/search`, search);
     }
     get(id) {
         return this.http.get<Hadith>(this.url + `had/` + id);
+    }
+    random() {
+        return this.http.get<Hadith>(this.url + `had/random`);
     }
 }

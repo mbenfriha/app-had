@@ -139,3 +139,13 @@ ion-list-header {
   height: calc(100% - constant(safe-area-inset-top));
   height: calc(100% - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }
+
+.bottom-menu {
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  bottom: 4%;
+  overflow: hidden;
+  width: 100%;
+  color: grey;
+}

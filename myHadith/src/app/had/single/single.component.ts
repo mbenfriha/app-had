@@ -3,6 +3,8 @@ import {HadService} from '../had.service';
 import {first} from 'rxjs/operators';
 import {Hadith} from '../../_models/hadith';
 import {ActivatedRoute} from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 
@@ -19,22 +21,39 @@ export class SingleComponent implements OnInit {
     constructor(
         private hadService: HadService,
         private actRoute: ActivatedRoute,
-        private clipboard: Clipboard) {
+        private clipboard: Clipboard,
+        public toastController: ToastController,
+        private storage: Storage) {
         this.loadHad(this.actRoute.snapshot.params.id);
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+
+        this.storage.get('save').then((save) => {
+            if (!save) {
+                this.storage.set('save', []);
+            }
+        });
+    }
 
     share(had) {
 
     }
+
+    async presentToast(message) {
+        const toast = await this.toastController.create({
+            message: 'message',
+            duration: 2000
+        });
+        toast.present();
+    }
     copy(had) {
 
-        this.clipboard.copy(had.translate[0].text + "\n" + had.translate[1].text);
+        this.clipboard.copy(had.title + '\n \n' + had.translate[0].text + '\n' + had.translate[1].text);
 
         this.clipboard.paste().then(
             (resolve: string) => {
-                alert(resolve);
+                this.presentToast('Hadith copié !');
             },
             (reject: string) => {
                 alert('Error: ' + reject);
@@ -42,11 +61,16 @@ export class SingleComponent implements OnInit {
         );
 
         this.clipboard.clear();
-
     }
 
     save(had) {
+        this.storage.get('save').then((save) => {
+            let saveAr = save;
+            saveAr.push(had);
 
+            this.storage.set('save', saveAr);
+            this.presentToast('Hadith sauvegardé !');
+        });
     }
 
     private loadHad(id) {

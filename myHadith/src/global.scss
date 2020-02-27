@@ -26,3 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+
+.item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
+  white-space: normal !important;
+}
