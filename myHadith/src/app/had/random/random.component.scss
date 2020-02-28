@@ -28,3 +28,27 @@ ion-card {
 p {
   color: white;
 }
+
+ion-button.active
+{
+  border-bottom: 3px white solid;
+}
+
+ion-content ion-toolbar {
+  --background: var(--ion-color-primary);
+  .toolbar-container {
+    padding: 0;
+  }
+}
+ion-content ion-toolbar ion-button {
+  color: white;
+  width: 50%;
+  margin: 0;
+}
+
+.had-inf {
+  float: right;
+  margin-bottom: 10px;
+  margin-top: 1em;
+  font-size: 14px;
+}

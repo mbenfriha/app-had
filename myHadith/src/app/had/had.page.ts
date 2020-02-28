@@ -63,12 +63,6 @@ export class HadPage implements OnInit {
         // Clear results
         this.allHad$.next(null);
 
-        // Make API call
-       // const url = `https://swapi.co/api/people/?search=${term.toLowerCase().trim()}`;
-       // this.http.get(url).subscribe((results) => {
-        //    this.allHad.next(results);
-        // });
-
         this.hadService.searchHad({search: term}).pipe(first()).subscribe((hadiths: any) => {
                this.allHad$.next(hadiths);
         });
@@ -85,12 +79,6 @@ export class HadPage implements OnInit {
                 event.target.disabled = true;
             }
         }, 500);
-    }
-    refreshData(event) {
-        this.allHad$.next(null);
-        this.allHads = [];
-        this.options.page = 1;
-        this.loadAllHads(event);
     }
 
      loadAllHads(event = null) {

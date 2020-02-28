@@ -9,16 +9,6 @@
 
 
 <ion-content [fullscreen]="true">
-
-  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
-    <ion-refresher-content
-            pullingIcon="arrow-dropdown"
-            pullingText="Tirer vers le bas pour rafraichir"
-            refreshingSpinner="circles"
-            refreshingText="Rafraîchissement...">
-    </ion-refresher-content>
-  </ion-refresher>
-
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{had?.title}}</ion-card-title>
@@ -30,12 +20,45 @@
       </ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content *ngFor="let trans of had?.translate">
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-button [class.active]="currentLang == 'fr'" (click)="currentLang = 'fr'">
+          Français
+        </ion-button>
+        <!--
+        <ion-button [class.active]="currentLang == 'ar'" (click)="currentLang = 'ar'">
+          Arabe
+        </ion-button>-->
+      </ion-buttons>
+    </ion-toolbar>
 
-      <h3 class="title-lang">{{trans.lang}}</h3>
-      <p *ngIf="trans.flag != 'ar'" > {{trans.text}} </p>
-      <p *ngIf="trans.flag == 'ar'" style="direction:rtl;"> {{trans.text}} </p>
+    <!--<ion-card-content *ngFor="let trans of had?.translate">
+      <div *ngIf="trans.flag  == currentLang">
+
+        <p *ngIf="trans.flag != 'ar'" > {{trans.text}} </p>
+        <p *ngIf="trans.flag == 'ar'" style="direction:rtl;"> {{trans.text}} </p>
+      </div>
+    </ion-card-content>-->
+
+
+    <ion-card-content>
+      <p> {{had?.translate[0]?.text}} </p>
+
+      <div class="had-inf">{{had?.collections[0]?.name}} n°{{had?.number}}</div>
     </ion-card-content>
   </ion-card>
 
 </ion-content>
+
+
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="arrow-forward-circle"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="end">
+    <ion-fab-button (click)="share(had)"><ion-icon name="share"></ion-icon></ion-fab-button>
+    <ion-fab-button (click)="save(had)"><ion-icon name="save"></ion-icon></ion-fab-button>
+    <ion-fab-button (click)="copy(had)"><ion-icon name="copy"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

@@ -13,6 +13,11 @@ export class SaveComponent implements OnInit {
     constructor(
       private storage: Storage) { }
 
+      deleteHad(i) {
+        this.allHads.splice(i, 1);
+        this.storage.set('save', this.allHads);
+      }
+
   ngOnInit() {
     this.storage.get('save').then(hads => {
       this.allHads = hads;

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button text="Retour"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="!load">MyHadith</ion-title>
+    <ion-title *ngIf="!load">Al Ahadith</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,11 +20,33 @@
       </ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content *ngFor="let trans of had?.translate">
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-button [class.active]="currentLang == 'fr'" (click)="currentLang = 'fr'">
+          Français
+        </ion-button>
+        <!--
+        <ion-button [class.active]="currentLang == 'ar'" (click)="currentLang = 'ar'">
+          Arabe
+        </ion-button>-->
+      </ion-buttons>
+    </ion-toolbar>
 
-      <h3 class="title-lang">{{trans.lang}}</h3>
-      <p *ngIf="trans.flag != 'ar'" > {{trans.text}} </p>
-      <p *ngIf="trans.flag == 'ar'" style="direction:rtl;"> {{trans.text}} </p>
+ <!--   <ion-card-content *ngFor="let trans of had?.translate">
+      <div *ngIf="trans.flag  == currentLang">
+
+        <p *ngIf="trans.flag != 'ar'" > {{trans.text}} </p>
+        <p *ngIf="trans.flag == 'ar'" style="direction:rtl;"> {{trans.text}} </p>
+        <div>{{had.collections[0].name}} n°{{had.number}}</div>
+      </div>
+
+
+    </ion-card-content>-->
+
+    <ion-card-content>
+      <p> {{had?.translate[0]?.text}} </p>
+
+      <div class="had-inf">{{had?.collections[0]?.name}} n°{{had?.number}}</div>
     </ion-card-content>
   </ion-card>
 

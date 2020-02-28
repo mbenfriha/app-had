@@ -14,14 +14,6 @@
 
 <ion-content [fullscreen]="true">
 
-    <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
-        <ion-refresher-content
-                pullingIcon="arrow-dropdown"
-                pullingText="Tirer vers le bas pour rafraichir"
-                refreshingSpinner="circles"
-                refreshingText="Rafraîchissement...">
-        </ion-refresher-content>
-    </ion-refresher>
     <div>
         <ion-list *ngIf="allHad$ | async as allHad; else loading">
             <ion-item *ngFor="let had of allHad"  [routerLink]="'/had/'+[had._id]">

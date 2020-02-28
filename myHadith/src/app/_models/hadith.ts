@@ -9,6 +9,7 @@ export class Translate {
 export class Hadith {
   _id: string;
   title: string;
+  number: number;
   collections: string;
   createdBy: string;
   category: Category[];

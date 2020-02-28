@@ -30,3 +30,17 @@
 .item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
   white-space: normal !important;
 }
+
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("./assets/brandon-grotesque-medium.otf");
+}
+
+
+ion-title, ion-menu ion-label {
+  font-family: "Brandon Grotesque" !important;
+  font-size: 20px !important;
+  font-weight: 600;
+}
+
+

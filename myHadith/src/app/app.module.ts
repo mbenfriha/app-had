@@ -13,6 +13,11 @@ import {HttpClientModule} from '@angular/common/http';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
+
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,7 +33,9 @@ import { IonicStorageModule } from '@ionic/storage';
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        Clipboard
+        Clipboard,
+        Deeplinks,
+        SocialSharing
     ],
     bootstrap: [AppComponent]
 })
