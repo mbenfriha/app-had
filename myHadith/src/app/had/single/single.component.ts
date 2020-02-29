@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
 
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import {AdMobFree} from '@ionic-native/admob-free/ngx';
+import {environment} from '../../../environments/environment';
 
 
 
@@ -20,64 +22,44 @@ export class SingleComponent implements OnInit {
     had: Hadith;
     load = true;
     currentLang = 'fr';
+
+    pub = environment.pub;
     constructor(
         private hadService: HadService,
         private actRoute: ActivatedRoute,
         private clipboard: Clipboard,
         public toastController: ToastController,
         private storage: Storage,
-        private socialSharing: SocialSharing) {
+        private socialSharing: SocialSharing,
+        private admobFree: AdMobFree) {
         this.loadHad(this.actRoute.snapshot.params.id);
     }
 
     ngOnInit() {
+        this.storage.get('premium').then((premium) => {
+            if (!premium) {
+                this.admobFree.interstitial.config({
+                    id: 'ca-app-pub-9393734224464508/9340595714',
+                    isTesting: this.pub,
+                })
+
+                this.admobFree.interstitial.prepare();
+
+                this.admobFree.interstitial.show();
+            }
+        });
     }
 
     share(had) {
 
-        const text = had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number  ;
+        const text = had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number + '\n al-ahadith.com/h/' + had._id ;
 
-        this.socialSharing.share(text, had.title, null, 'al-ahadith.com/had/' + had._id).then(res => {
+        this.socialSharing.share(text, had.title, null, 'al-ahadith.com/h/' + had._id).then(res => {
             console.log('cool');
         }).catch(e => {
             console.log(e);
         });
-        /*      this.socialSharing.shareViaWhatsApp(text, null, 'https://al-ahadith.com').then((res) => {
-                  // Success
-              }).catch((e) => {
-                  // Error!
-              });
-              this.socialSharing.shareViaInstagram(text, null).then((res) => {
-                  // Success
-              }).catch((e) => {
-                  // Error!
-              });
 
-              this.socialSharing.shareViaFacebook(text, null, 'https://al-ahadith.com').then((res) => {
-                  // Success
-              }).catch((e) => {
-                  // Error!
-              });
-
-              this.socialSharing.shareViaTwitter(text, null, 'https://al-ahadith.com').then((res) => {
-                  // Success
-              }).catch((e) => {
-                  // Error!
-              });
-
-              // Check if sharing via email is supported
-              this.socialSharing.canShareViaEmail().then(() => {
-                  // Sharing via email is possible
-              }).catch(() => {
-                  // Sharing via email is not possible
-              });
-
-      // Share via email
-              this.socialSharing.shareViaEmail(text, had.title, ['recipient@example.org']).then(() => {
-                  // Success!
-              }).catch(() => {
-                  // Error!
-              });*/
     }
 
     async presentToast(message: string) {

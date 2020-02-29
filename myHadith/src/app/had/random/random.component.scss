@@ -25,10 +25,6 @@ ion-card {
   margin-bottom: 6em;
 }
 
-p {
-  color: white;
-}
-
 ion-button.active
 {
   border-bottom: 3px white solid;
@@ -51,4 +47,16 @@ ion-content ion-toolbar ion-button {
   margin-bottom: 10px;
   margin-top: 1em;
   font-size: 14px;
+}
+
+
+ion-spinner {
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 44vh;
+  left: 41%;
+  width: 15%;
+  height: 15%;
+  color: var(--ion-color-primary);
 }

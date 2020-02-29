@@ -22,7 +22,10 @@
       <ion-item *ngFor="let had of allHad"  [routerLink]="'/had/'+[had._id]">
         <ion-label>
           <h2>{{had.title}}</h2>
-          <h3><span *ngFor="let cat of had.category">{{cat.name}}</span></h3>
+          <h3>
+                        <span class="category-had" *ngFor="let cat of had.category; let i = index">{{cat.name}}<span *ngIf="i < had.category.length - 1">, </span>
+                    </span>
+          </h3>
         </ion-label>
       </ion-item>
     </ion-list>

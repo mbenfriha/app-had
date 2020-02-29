@@ -15,8 +15,8 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-
-
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
+import { InAppPurchase } from '@ionic-native/in-app-purchase/ngx';
 
 
 @NgModule({
@@ -35,7 +35,9 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         Clipboard,
         Deeplinks,
-        SocialSharing
+        SocialSharing,
+        AdMobFree,
+        InAppPurchase
     ],
     bootstrap: [AppComponent]
 })

@@ -30,13 +30,15 @@ export class RandomComponent implements OnInit {
 
 
     refreshData(event) {
+        this.had = null;
+        this.load = true;
         this.loadHad(event);
     }
 
     share(had) {
-        const text = had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number  ;
+        const text = had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number + '\n al-ahadith.com/h/' + had._id ;
 
-        this.socialSharing.share(text, had.title, null, 'al-ahadith.com/had/' + had._id).then(res => {
+        this.socialSharing.share(text, had.title, null, 'al-ahadith.com/h/' + had._id).then(res => {
         }).catch(e => {
             console.log(e);
         });

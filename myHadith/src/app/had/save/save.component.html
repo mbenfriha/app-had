@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <div>
-    <ion-list *ngIf="allHads ; else not">
+    <ion-list *ngIf="allHads.length > 0 ; else not">
       <ion-item-sliding *ngFor="let had of allHads; let i = index" >
         <ion-item-options side="start">
           <ion-item-option color="danger" (click)="deleteHad(i)" expandable>

@@ -8,6 +8,11 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import {HadPage} from './had/had.page';
 import {SingleComponent} from './had/single/single.component';
 import {Router} from '@angular/router';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import {environment} from '../environments/environment';
+import {InAppPurchase} from '@ionic-native/in-app-purchase/ngx';
+
+const BUY_PREMIUM = 'com.mohamedbenfriha.alahadith.premium';
 
 
 @Component({
@@ -17,6 +22,11 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
     public selectedIndex = 0;
+    premium = false;
+    products = [];
+    previousPurchases = [];
+
+    pub = environment.pub;
     public appPages = [
         {
             title: 'Accueil',
@@ -47,7 +57,9 @@ export class AppComponent implements OnInit {
         private storage: Storage,
         private deeplinks: Deeplinks,
         private router: Router,
-        private zone: NgZone
+        private zone: NgZone,
+        private admobFree: AdMobFree,
+        private iap: InAppPurchase
     ) {
         this.initializeApp();
     }
@@ -57,11 +69,31 @@ export class AppComponent implements OnInit {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.setupDeeplinks();
+
+            this.iap.getProducts([BUY_PREMIUM])
+                .then((products) => {
+                    this.products = products;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            this.storage.get('premium').then((premium) => {
+                if (!premium) {
+                    this.admobFree.interstitial.config({
+                        id: 'ca-app-pub-9393734224464508/9340595714',
+                        isTesting: this.pub,
+                    })
+
+                    this.admobFree.interstitial.prepare();
+
+                    this.admobFree.interstitial.show();
+                }
+            });
         });
     }
 
     setupDeeplinks() {
-        this.deeplinks.route({ '/:id': 'had', '' : '' }).subscribe(
+        this.deeplinks.route({ '/:id': 'had', '' : '', '/h/:id': 'had' }).subscribe(
             match => {
                 const id = 'id';
                 let internalPath = `/`;
@@ -93,5 +125,29 @@ export class AppComponent implements OnInit {
                 this.storage.set('save', []);
             }
         });
+    }
+
+    buyPrem() {
+        this.iap.buy(BUY_PREMIUM).then(data => {
+            this.enablePremium(BUY_PREMIUM);
+        });
+    }
+
+    restore() {
+        this.iap.restorePurchases().then(purchases => {
+            this.previousPurchases = purchases;
+            // Unlock the features of the purchases!
+            for (let prev of this.previousPurchases) {
+                this.enablePremium(prev.productId);
+            }
+        });
+    }
+
+    enablePremium(id) {
+        // Normally store these settings/purchases inside your app or server!
+        if (id === BUY_PREMIUM) {
+            this.premium = true;
+            this.storage.set('premium', true);
+        }
     }
 }

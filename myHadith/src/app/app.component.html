@@ -11,9 +11,17 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <ion-item (click)="buyPrem()" *ngIf="!this.premium" class="buy-prem ion-align-items-center">
+            <ion-icon slot="end" [ios]="'cash-outline'" [md]="'cash-sharp'"></ion-icon>
+            <ion-label>Version sans publicité <br> <span class="buy-item">Acheter pour 4,49€</span></ion-label>
+          </ion-item>
+          <ion-item (click)="restore()" *ngIf="!this.premium" style="font-size: 13px;">
+            Restaurer mon achat
+          </ion-item>
         </ion-list>
         <div class="bottom-menu">
-          MyHadith v1
+          Al Ahadith v1
         </div>
       </ion-content>
     </ion-menu>

@@ -16,8 +16,8 @@ export class HadPage implements OnInit {
     @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll: IonInfiniteScroll;
     allHad$: Subject<Hadith[]> = new Subject();
     allHads: Hadith[] = [];
-    options = {page: 1, limit: 10};
-    hasNextPage: boolean;
+    options = {page: 1, limit: 15};
+    hasNextPage: boolean = true;
     public inputValue: string;
     public debouncedInputValue = this.inputValue;
     private searchDecouncer$: Subject<string> = new Subject();
@@ -28,7 +28,9 @@ export class HadPage implements OnInit {
                 private hadService: HadService) { }
 
     ngOnInit() {
-        this.loadAllHads();
+        if (this.options.page == 1) {
+            this.loadAllHads();
+        }
         this.setupSearchDebouncer();
 
     }
@@ -64,9 +66,9 @@ export class HadPage implements OnInit {
         this.allHad$.next(null);
 
         this.hadService.searchHad({search: term}).pipe(first()).subscribe((hadiths: any) => {
-               this.allHad$.next(hadiths);
+            this.allHad$.next(hadiths);
         });
-        }
+    }
 
     loadData(event) {
         setTimeout(() => {
@@ -81,17 +83,23 @@ export class HadPage implements OnInit {
         }, 500);
     }
 
-     loadAllHads(event = null) {
-        this.hadService.getAll(this.options).pipe(first()).subscribe((hadiths: any) => {
-            this.allHads.push.apply(this.allHads, hadiths.docs);
+    loadAllHads(event = null) {
+        if (this.options.page == 1) {
+            this.allHads =  [];
+            this.allHad$.next(null);
+        }
+        if (this.hasNextPage) {
+            this.hadService.getAll(this.options).pipe(first()).subscribe((hadiths: any) => {
+                this.allHads.push.apply(this.allHads, hadiths.docs);
 
-            this.allHad$.next(this.allHads);
-            this.hasNextPage = hadiths.hasNextPage;
-            console.log(this.hasNextPage);
-            this.options.page = hadiths.nextPage;
-            if (event) {
-                event.target.complete();
-            }
-        });
+                this.allHad$.next(this.allHads);
+                this.hasNextPage = hadiths.hasNextPage;
+                console.log(this.hasNextPage);
+                this.options.page = hadiths.nextPage;
+                if (event) {
+                    event.target.complete();
+                }
+            });
+        }
     }
 }

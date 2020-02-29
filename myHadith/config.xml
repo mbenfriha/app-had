@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="my.had.mb" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.mohamedbenfriha.alahadith" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Al Ahadith</name>
     <description>Al Ahadith </description>
     <author email="benfriha.mohamed@gmail.com" href="https://mohamedbenfriha.me">Benfriha Mohamed</author>
@@ -55,6 +55,12 @@
             <array>
                 <string>applinks:al-ahadith.com</string>
             </array>
+        </config-file>
+        <config-file parent="GADIsAdManagerApp" target="*-Info.plist">
+            <true />
+        </config-file>
+        <config-file parent="GADApplicationIdentifier" target="*-Info.plist">
+            <string>ca-app-pub-9393734224464508~2036341839</string>
         </config-file>
         <config-file parent="com.apple.developer.associated-domains" target="*-Release.plist">
             <array>
