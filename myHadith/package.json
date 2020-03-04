@@ -1,8 +1,8 @@
 {
   "name": "myHadith",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Al Ahadith app",
+  "homepage": "https://al-ahadith.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -78,7 +78,7 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project",
+  "description": "Al Ahadith app",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -95,13 +95,15 @@
         "DEEPLINK_HOST": "al-ahadith.com",
         "ANDROID_PATH_PREFIX": "/"
       },
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "<YOUR_ANDROID_ADMOB_APP_ID_AS_FOUND_IN_ADMOB>"
+      },
+      "cordova-plugin-inapppurchase": {},
+      "cordova-plugin-firebase": {},
       "cordova-plugin-x-socialsharing": {
         "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
-      },
-      "cordova-plugin-admob-free": {},
-      "cordova-plugin-inapppurchase": {},
-      "cordova-plugin-firebase": {}
+      }
     },
     "platforms": [
       "ios"

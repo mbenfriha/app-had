@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HadService} from '../had.service';
 import {first} from 'rxjs/operators';
 import {Hadith} from '../../_models/hadith';
@@ -18,7 +18,7 @@ import {environment} from '../../../environments/environment';
     templateUrl: './single.component.html',
     styleUrls: ['./single.component.scss'],
 })
-export class SingleComponent implements OnInit {
+export class SingleComponent implements OnInit, AfterViewInit {
     had: Hadith;
     load = true;
     currentLang = 'fr';
@@ -36,6 +36,9 @@ export class SingleComponent implements OnInit {
     }
 
     ngOnInit() {
+
+    }
+    ngAfterViewInit(): void {
         this.storage.get('premium').then((premium) => {
             if (!premium) {
                 this.admobFree.interstitial.config({
@@ -55,7 +58,6 @@ export class SingleComponent implements OnInit {
         const text = had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number + '\n al-ahadith.com/h/' + had._id ;
 
         this.socialSharing.share(text, had.title, null, 'al-ahadith.com/h/' + had._id).then(res => {
-            console.log('cool');
         }).catch(e => {
             console.log(e);
         });
