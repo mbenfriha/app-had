@@ -58,9 +58,7 @@ export class SingleComponent implements OnInit, AfterViewInit {
         const text = had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number + '\n al-ahadith.com/h/' + had._id ;
 
         this.socialSharing.share(text, had.title, null, 'al-ahadith.com/h/' + had._id).then(res => {
-        }).catch(e => {
-            console.log(e);
-        });
+        }).catch(e => {});
 
     }
 

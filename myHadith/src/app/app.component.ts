@@ -1,6 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import {AlertController, LoadingController, Platform, ToastController} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {Storage} from '@ionic/storage';
@@ -59,7 +59,10 @@ export class AppComponent implements OnInit {
         private router: Router,
         private zone: NgZone,
         private admobFree: AdMobFree,
-        private iap: InAppPurchase
+        private iap: InAppPurchase,
+        public toastController: ToastController,
+        public alertController: AlertController,
+        public loadingController: LoadingController
     ) {
         this.initializeApp();
     }
@@ -112,8 +115,8 @@ export class AppComponent implements OnInit {
             },
             nomatch => {
                 // nomatch.$link - the full link data
-                console.log(nomatch.$link.path);
-                console.error('Got a deeplink that didn\'t match', nomatch);
+              //  console.log(nomatch.$link.path);
+              //  console.error('Got a deeplink that didn\'t match', nomatch);
 
             }
         );
@@ -127,19 +130,73 @@ export class AppComponent implements OnInit {
         });
     }
 
-    buyPrem() {
-        this.iap.buy(BUY_PREMIUM).then(data => {
+    async buyPrem() {
+
+        const loading = await this.loadingController.create({});
+        await loading.present();
+
+
+        console.log('Loading dismissed!');
+            this.iap.buy(BUY_PREMIUM).then(data => {
+                loading.dismiss();
             this.enablePremium(BUY_PREMIUM);
-        });
+
+        }) .catch(async (err) => {
+
+                loading.dismiss();
+                console.log(err);
+                const alert = await this.alertController.create({
+                    header: 'Erreur',
+                    message: err.errorMessage,
+                    buttons: ['OK']
+                });
+
+                await alert.present();
+            });;
     }
 
-    restore() {
-        this.iap.restorePurchases().then(purchases => {
-            this.previousPurchases = purchases;
-            // Unlock the features of the purchases!
-            for (let prev of this.previousPurchases) {
-                this.enablePremium(prev.productId);
-            }
+   async restore() {
+
+        const loading = await this.loadingController.create({});
+        await loading.present();
+
+       this.iap.restorePurchases().then(async purchases => {
+
+           if(purchases.length < 1) {
+               const alert = await this.alertController.create({
+                   header: 'Information',
+                   message: "\n" +
+                       "Aucune transaction antérieur trouvé. " +
+                       "Pour restaurer le produit acheté, appuyez 'acheter' à nouveau. " +
+                       "Si vous avez déjà payé vous ne ne serez pas facturé, mais l'achat sera rétabli.",
+                   buttons: ['OK']
+               });
+
+               await alert.present();
+           }
+           else {
+               this.previousPurchases = purchases;
+               // Unlock the features of the purchases!
+               for (let prev of this.previousPurchases) {
+                   this.enablePremium(prev.productId);
+               }
+
+
+               this.presentToast('Achat restauré !');
+           }
+
+           loading.dismiss();
+        }) .catch(async (err) => {
+
+           loading.dismiss();
+            console.log(err);
+                const alert = await this.alertController.create({
+                    header: 'Erreur',
+                    message: err.errorMessage,
+                    buttons: ['OK']
+                });
+
+                await alert.present();
         });
     }
 
@@ -149,5 +206,14 @@ export class AppComponent implements OnInit {
             this.premium = true;
             this.storage.set('premium', true);
         }
+    }
+
+    async presentToast(message: string) {
+        const mess = message;
+        const toast = await this.toastController.create({
+            message: mess,
+            duration: 2000
+        });
+        toast.present();
     }
 }
