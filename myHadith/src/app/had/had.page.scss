@@ -44,3 +44,14 @@ ion-refresher-content {
 .category-had {
   color: #5da316 !important;
 }
+
+
+ion-toolbar .sc-ion-searchbar-md-h {
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  -webkit-padding-end: 0px;
+  padding-inline-end: 0px;
+  margin-bottom: -12px;
+}

@@ -41,10 +41,6 @@ export class SingleComponent implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         this.storage.get('premium').then((premium) => {
             if (!premium) {
-                this.admobFree.interstitial.config({
-                    id: 'ca-app-pub-9393734224464508/9340595714',
-                    isTesting: this.pub,
-                })
 
                 this.admobFree.interstitial.prepare();
 

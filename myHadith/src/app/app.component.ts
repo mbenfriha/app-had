@@ -58,11 +58,11 @@ export class AppComponent implements OnInit {
         private deeplinks: Deeplinks,
         private router: Router,
         private zone: NgZone,
-        private admobFree: AdMobFree,
         private iap: InAppPurchase,
         public toastController: ToastController,
         public alertController: AlertController,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        private admobFree: AdMobFree
     ) {
         this.initializeApp();
     }
@@ -73,6 +73,21 @@ export class AppComponent implements OnInit {
             this.splashScreen.hide();
             this.setupDeeplinks();
 
+
+            if (this.platform.is('ios')) {
+                this.admobFree.interstitial.config({
+                    id: 'ca-app-pub-9393734224464508/9340595714',
+                    isTesting: this.pub,
+                })
+
+            }
+            if (this.platform.is('android')) {
+                this.admobFree.interstitial.config({
+                    id: 'ca-app-pub-9393734224464508/6100978846',
+                    isTesting: this.pub,
+                });
+            }
+
             this.iap.getProducts([BUY_PREMIUM])
                 .then((products) => {
                     this.products = products;
@@ -82,10 +97,6 @@ export class AppComponent implements OnInit {
                 });
             this.storage.get('premium').then((premium) => {
                 if (!premium) {
-                    this.admobFree.interstitial.config({
-                        id: 'ca-app-pub-9393734224464508/9340595714',
-                        isTesting: this.pub,
-                    })
 
                     this.admobFree.interstitial.prepare();
 

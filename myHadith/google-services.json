@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "700793528065",
+    "firebase_url": "https://al-ahadith.firebaseio.com",
+    "project_id": "al-ahadith",
+    "storage_bucket": "al-ahadith.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700793528065:android:3e70844b767f7ae60dc500",
+        "android_client_info": {
+          "package_name": "com.mohamedbenfriha.alahadith"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700793528065-0c9gl29ju91tfn8ntv10dmd5n90ga6ap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLlw9h5QkCdHcV426vyeApo87hJ5Ba8Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700793528065-0c9gl29ju91tfn8ntv10dmd5n90ga6ap.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "700793528065-b5f1m123g9ta1t1dt3pnr9b7klmf1467.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mohamedbenfriha.alahadith"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700793528065:android:7db1c8aaf5dd04e40dc500",
+        "android_client_info": {
+          "package_name": "com.mohamedbenfriha.alahadith.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700793528065-0c9gl29ju91tfn8ntv10dmd5n90ga6ap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLlw9h5QkCdHcV426vyeApo87hJ5Ba8Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700793528065-0c9gl29ju91tfn8ntv10dmd5n90ga6ap.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "700793528065-b5f1m123g9ta1t1dt3pnr9b7klmf1467.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mohamedbenfriha.alahadith"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
