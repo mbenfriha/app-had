@@ -56,16 +56,8 @@ export class RandomComponent implements OnInit {
 
         this.clipboard.copy(had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number + '\n Vu sur l\'app al-ahadith.com');
 
-        this.clipboard.paste().then(
-            (resolve: string) => {
-                this.presentToast('Hadith copié !');
-            },
-            (reject: string) => {
-                alert('Error: ' + reject);
-            }
-        );
+        this.presentToast('Hadith copié !');
 
-        this.clipboard.clear();
     }
 
     save(had) {

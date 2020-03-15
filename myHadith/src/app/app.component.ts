@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 import {environment} from '../environments/environment';
 import {InAppPurchase} from '@ionic-native/in-app-purchase/ngx';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 
 const BUY_PREMIUM = 'com.mohamedbenfriha.alahadith.premium';
 
@@ -62,7 +63,8 @@ export class AppComponent implements OnInit {
         private iap: InAppPurchase,
         public toastController: ToastController,
         public alertController: AlertController,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        private appRate: AppRate
     ) {
         this.initializeApp();
     }
@@ -72,6 +74,24 @@ export class AppComponent implements OnInit {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.setupDeeplinks();
+
+            this.appRate.preferences.storeAppURL = {
+                ios: '1500769223',
+            };
+            this.appRate.preferences.displayAppName = "Al Ahadith";
+            this.appRate.preferences.customLocale = {
+                title: "Veux-tu noter %@ ?",
+                message: "Ça ne prendra pas plus d'une minute et ça contribue à promouvoir l'application. Merci !",
+                cancelButtonLabel: "Non, merci",
+                laterButtonLabel: "Plus tard",
+                rateButtonLabel: "Noter maintenant",
+                yesButtonLabel: "Oui !",
+                noButtonLabel: "Pas vraiment",
+                appRatePromptTitle: 'Est ce que tu aimes %@ ?',
+                feedbackPromptTitle: 'Veux tu nous faire un retour ?',
+            };
+
+            this.appRate.promptForRating(false);
 
             this.iap.getProducts([BUY_PREMIUM])
                 .then((products) => {
@@ -87,9 +107,9 @@ export class AppComponent implements OnInit {
                         isTesting: this.pub,
                     })
 
-                    this.admobFree.interstitial.prepare();
+                    // this.admobFree.interstitial.prepare();
 
-                    this.admobFree.interstitial.show();
+                  //  this.admobFree.interstitial.show();
                 }
             });
         });
@@ -215,5 +235,10 @@ export class AppComponent implements OnInit {
             duration: 2000
         });
         toast.present();
+    }
+
+    rate() {
+        console.log('note');
+        this.appRate.navigateToAppStore();
     }
 }

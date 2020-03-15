@@ -43,4 +43,18 @@ ion-title, ion-menu ion-label {
   font-weight: 600;
 }
 
+.fab-vertical-bottom {
+  bottom: 20px;
+}
 
+
+ion-spinner {
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 44vh;
+  left: 41%;
+  width: 15%;
+  height: 15%;
+  color: var(--ion-color-primary);
+}

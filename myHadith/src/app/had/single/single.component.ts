@@ -74,16 +74,7 @@ export class SingleComponent implements OnInit, AfterViewInit {
 
         this.clipboard.copy(had.title + '\n \n' + had.translate[0].text + '\n' + had.collections[0].name + ' n°' + had.number + '\n Vu sur l\'app al-ahadith.com');
 
-        this.clipboard.paste().then(
-            (resolve: string) => {
-                this.presentToast('Hadith copié !');
-            },
-            (reject: string) => {
-                alert('Error: ' + reject);
-            }
-        );
-
-        this.clipboard.clear();
+        this.presentToast('Hadith copié !');
     }
 
     save(had) {

@@ -10,7 +10,12 @@
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
+
           </ion-menu-toggle>
+          <ion-item >
+            <ion-icon slot="start"  name="star-half-outline"></ion-icon>
+            <ion-label (click)="rate()">Noter Al Ahadith</ion-label>
+          </ion-item>
 
           <ion-item (click)="buyPrem()" *ngIf="!this.premium" class="buy-prem ion-align-items-center">
             <ion-icon slot="end" [ios]="'cash-outline'" [md]="'cash-sharp'"></ion-icon>
@@ -21,7 +26,7 @@
           </ion-item>
         </ion-list>
         <div class="bottom-menu">
-          Al Ahadith v1
+          Al Ahadith v1.1
         </div>
       </ion-content>
     </ion-menu>

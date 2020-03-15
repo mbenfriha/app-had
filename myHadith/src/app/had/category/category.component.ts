@@ -10,6 +10,7 @@ import {CategoryService} from './category.service';
 })
 export class CategoryComponent implements OnInit {
     category: Category[];
+    load = true;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -20,6 +21,7 @@ export class CategoryComponent implements OnInit {
     private loadAllCategory() {
         this.categoryService.getAll().pipe(first()).subscribe(category => {
             this.category = category;
+            this.load = false;
 
         });
     }

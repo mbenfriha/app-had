@@ -17,6 +17,7 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AdMobFree } from '@ionic-native/admob-free/ngx';
 import { InAppPurchase } from '@ionic-native/in-app-purchase/ngx';
+import { AppRate } from "@ionic-native/app-rate/ngx";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { InAppPurchase } from '@ionic-native/in-app-purchase/ngx';
         Deeplinks,
         SocialSharing,
         AdMobFree,
-        InAppPurchase
+        InAppPurchase,
+        AppRate
     ],
     bootstrap: [AppComponent]
 })
