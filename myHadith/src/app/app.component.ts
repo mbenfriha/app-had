@@ -156,6 +156,7 @@ export class AppComponent implements OnInit {
         await loading.present();
 
 
+
         console.log('Loading dismissed!');
             this.iap.buy(BUY_PREMIUM).then(data => {
                 loading.dismiss();
